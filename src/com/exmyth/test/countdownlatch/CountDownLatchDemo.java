@@ -18,7 +18,7 @@ CountDownLatch如其所写，是一个倒计数的锁存器，当计数减至0�
       */
      public static void main(String[] args) {
          // TODO Auto-generated method stub
-         //对于每位运动员，CountDownLatch减1后即结束比赛
+         //对于每位运动员，CountDownLatch减1后即开始比赛
          CountDownLatch begin = new CountDownLatch(1);
          //对于整个比赛，所有运动员结束后才算结束
          CountDownLatch end = new CountDownLatch(PLAYER_AMOUNT);
