@@ -6,6 +6,8 @@ import java.io.IOException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -16,9 +18,22 @@ public class TestPOIRange2 {
 	public static void main(String[] args) throws IOException {
 		FileOutputStream fos=new FileOutputStream("D:\\test.xlsx");  
         
-		XSSFWorkbook wb=new XSSFWorkbook();  
+		XSSFWorkbook wb=new XSSFWorkbook();
+		XSSFCellStyle styleContent = wb.createCellStyle(); // 样式对象    
+		XSSFCellStyle styleHeader = wb.createCellStyle(); // 样式对象    
+	     
+        styleContent.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// 垂直    
+        styleContent.setAlignment(XSSFCellStyle.ALIGN_RIGHT);// 水平 
+        
+        XSSFFont headerFont  = wb.createFont();
+        headerFont.setFontHeightInPoints((short) 11);    //设置字体大小
+        headerFont.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);//加粗      
+        
+        styleHeader.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// 垂直    
+        styleHeader.setAlignment(XSSFCellStyle.ALIGN_CENTER);// 水平  
+        styleHeader.setFont(headerFont);
           
-		XSSFSheet sheet=wb.createSheet();  
+		XSSFSheet sheet=wb.createSheet();
           
         //在sheet里增加合并单元格  
 		/* 
@@ -45,28 +60,34 @@ public class TestPOIRange2 {
 				"迟到","","","早退","","",
 				"旷工（天）","请假（小时）","出差（天）","出勤（天）","工作时长"};
         Cell cell = null;
-        for(int i = 0; i < 14; i++){
-        	if(i/3==1&&i%3!=0){
-        		continue;
-        	}
-        	if(i>6&&(i-6)/6==1&&(i-6)%3!=0){
-        		continue;
-        	}
-        	cell = row.createCell(i);
-        	cell.setCellValue(header[i]);
-        }
+        sheet.setDefaultColumnWidth(12);
+        for(int i = 0; i < header.length; i++){
+	    	sheet.setDefaultColumnStyle(i, styleContent);
+	    	if((i>3&&(i-3)/3==0&&(i-3)%3!=0)||(i>6&&(i-6)/3==0&&(i-6)%3!=0)){
+	    		continue;
+	    	}
+	    	cell = row.createCell(i,Cell.CELL_TYPE_STRING);
+	    	cell.setCellValue(header[i]);
+	    	cell.setCellStyle(styleHeader);
+	    }
         row = sheet.createRow(1);
-        cell = row.createCell(3);
+        cell = row.createCell(3,Cell.CELL_TYPE_STRING);
+        cell.setCellStyle(styleHeader);
         cell.setCellValue("分钟");
-        cell = row.createCell(4);
+        cell = row.createCell(4,Cell.CELL_TYPE_STRING);
+        cell.setCellStyle(styleHeader);
         cell.setCellValue("小时");
-        cell = row.createCell(5);
+        cell = row.createCell(5,Cell.CELL_TYPE_STRING);
+        cell.setCellStyle(styleHeader);
         cell.setCellValue("次数");
-        cell = row.createCell(6);
+        cell = row.createCell(6,Cell.CELL_TYPE_STRING);
+        cell.setCellStyle(styleHeader);
         cell.setCellValue("分钟");
-        cell = row.createCell(7);
+        cell = row.createCell(7,Cell.CELL_TYPE_STRING);
+        cell.setCellStyle(styleHeader);
         cell.setCellValue("小时");
-        cell = row.createCell(8);
+        cell = row.createCell(8,Cell.CELL_TYPE_STRING);
+        cell.setCellStyle(styleHeader);
         cell.setCellValue("次数");
         wb.write(fos);  
         fos.close();  
