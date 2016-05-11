@@ -4,16 +4,18 @@ import java.io.File;
 
 public class RenameTest {
 	public static void main(String[] args) {
-		File file = new File("D:/APP/员工生日-v07-3 直接在背景上过度");
+		File file = new File("D:/APP/入职100天-v07-3 直接在背景上过度 - 副本");
 		File[] listFiles = file.listFiles();
 		System.out.println(listFiles.length);
 		for(int i = 0; i < listFiles.length; i++){
 			String name = listFiles[i].getName();
-			int num = Integer.parseInt(name.substring((name.length()-9),(name.length()-4)))-72;
-			String format = format("0", 2, num);
-			System.out.println();
+//			int num = Integer.parseInt(name.substring((name.length()-9),(name.length()-4)))-72;
+//			String format = format("0", 2, num);
+			System.out.println(name);
+//			System.out.println(name.substring(11));
 //			System.out.println(num);
-			listFiles[i].renameTo(new File(file, "celebration"+format+".png"));
+//			listFiles[i].renameTo(new File(file, "celebration"+format+".png"));
+			listFiles[i].renameTo(new File(file, "celebration0"+name.substring(11)));
 		}
 	}
 	
