@@ -4,7 +4,7 @@ import java.io.File;
 
 public class RenameTest {
 	public static void main(String[] args) {
-		File file = new File("D:/APP/入职100天-v07-3 直接在背景上过度 - 副本");
+		File file = new File("D:/APP/访客-v07-3");
 		File[] listFiles = file.listFiles();
 		System.out.println(listFiles.length);
 		for(int i = 0; i < listFiles.length; i++){
@@ -15,7 +15,7 @@ public class RenameTest {
 //			System.out.println(name.substring(11));
 //			System.out.println(num);
 //			listFiles[i].renameTo(new File(file, "celebration"+format+".png"));
-			listFiles[i].renameTo(new File(file, "celebration0"+name.substring(11)));
+			listFiles[i].renameTo(new File(file, "visitor_attend0"+name.substring(14)));
 		}
 	}
 	
